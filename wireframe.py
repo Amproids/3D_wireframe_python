@@ -1,9 +1,7 @@
 import tkinter as tk
 import math
-import time
-import pprint
-import threading
 
+pi = math.pi
 SCREEN_DIMENSIONS = (860, 600)
 
 class CAMERA:
@@ -49,6 +47,22 @@ class pyramid:
             'C': (coordinates[0] + whd[0],       coordinates[1],          coordinates[2] + whd[2]      ),
             'D': (coordinates[0],                coordinates[1],          coordinates[2] + whd[2]      ),
             'E': (coordinates[0] + (whd[0] / 2), coordinates[1] + whd[1], coordinates[2] + (whd[2] / 2))
+        }
+
+class circle:
+    def __init__(self, coordinates, radius):
+        self.edge_table = ('AB', 'BC', 'CD', 'DE', 'EF', 'FG', 'GH', 'HI', 'IJ', 'JA')
+        self.vertex_table = {
+            'A': (coordinates[0] + math.sin(2 * pi * (0/10)) * radius, coordinates[1], coordinates[2] + math.cos(2 * pi * (0/10)) * radius),
+            'B': (coordinates[0] + math.sin(2 * pi * (1/10)) * radius, coordinates[1], coordinates[2] + math.cos(2 * pi * (1/10)) * radius),
+            'C': (coordinates[0] + math.sin(2 * pi * (2/10)) * radius, coordinates[1], coordinates[2] + math.cos(2 * pi * (2/10)) * radius),
+            'D': (coordinates[0] + math.sin(2 * pi * (3/10)) * radius, coordinates[1], coordinates[2] + math.cos(2 * pi * (3/10)) * radius),
+            'E': (coordinates[0] + math.sin(2 * pi * (4/10)) * radius, coordinates[1], coordinates[2] + math.cos(2 * pi * (4/10)) * radius),
+            'F': (coordinates[0] + math.sin(2 * pi * (5/10)) * radius, coordinates[1], coordinates[2] + math.cos(2 * pi * (5/10)) * radius),
+            'G': (coordinates[0] + math.sin(2 * pi * (6/10)) * radius, coordinates[1], coordinates[2] + math.cos(2 * pi * (6/10)) * radius),
+            'H': (coordinates[0] + math.sin(2 * pi * (7/10)) * radius, coordinates[1], coordinates[2] + math.cos(2 * pi * (7/10)) * radius),
+            'I': (coordinates[0] + math.sin(2 * pi * (8/10)) * radius, coordinates[1], coordinates[2] + math.cos(2 * pi * (8/10)) * radius),
+            'J': (coordinates[0] + math.sin(2 * pi * (9/10)) * radius, coordinates[1], coordinates[2] + math.cos(2 * pi * (9/10)) * radius)
         }
 
 def rotate_polyhedron(polyhedron, rotation):
@@ -126,6 +140,7 @@ def main():
     door = rectangular_plane((-30, -150, -150), (60, 100, 0))
     window1 = rectangular_plane((-120, -100, -150), (70, 50, 0))
     window2 = rectangular_plane((50, -100, -150), (70, 50, 0))
+    floor = circle((0, -150, 0), 100)
 
     def refresh_canvas():
         print(shape_rotation)
@@ -140,6 +155,7 @@ def main():
             render_polyhedron(canvas, rotate_polyhedron(door, shape_rotation), CAMERA)
             render_polyhedron(canvas, rotate_polyhedron(window1, shape_rotation), CAMERA)
             render_polyhedron(canvas, rotate_polyhedron(window2, shape_rotation), CAMERA)
+            render_polyhedron(canvas, rotate_polyhedron(floor, shape_rotation), CAMERA)
 
     def cube_button_clicked():
         global shape_state 
