@@ -1,6 +1,5 @@
 import tkinter as tk
 import math
-import pprint
 
 pi = math.pi
 SCREEN_DIMENSIONS = (800, 600)
@@ -242,7 +241,6 @@ def main():
     roof_ornament = sphere((0, 170, 0), 20)
 
     def refresh_canvas():
-        print(shape_rotation)
         canvas.delete("all")
         if shape_state == 0:
             render_polyhedron(canvas, rotate_polyhedron(cube1, shape_rotation), CAMERA)
